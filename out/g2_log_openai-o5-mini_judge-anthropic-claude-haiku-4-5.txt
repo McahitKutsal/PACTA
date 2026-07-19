@@ -1,0 +1,11 @@
+[GERÇEK] API yargıç: Anthropic (iki-fazlı).
+
+==================================================================
+G2 PİLOT — openai-o5-mini_judge-anthropic-claude-haiku-4-5   (n=8/hücre, 16 hücre)
+Ajan: o5-mini  |  Yargıç: claude-haiku-4-5
+Başlangıç: 2026-07-08T15:46:37
+==================================================================
+
+### FAZ 1/2 — AJAN KOŞULARI (o5-mini) ###
+
+[1/16] S1/P0  (persona_B=deceptive)

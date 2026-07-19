@@ -1,0 +1,18 @@
+# Gizli anahtarlar — ASLA depoya girmemeli
+.env
+.env.*
+!.env.example
+*.docx
+*.pdf
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+deal-room/.env
+deal-room/.env.*
+!deal-room/.env.example
+
+# Koşu çıktıları (isteğe bağlı; büyük/üretilmiş)
+# out/

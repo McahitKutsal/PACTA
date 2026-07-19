@@ -1,0 +1,83 @@
+[MOCK-JUDGE] Ajanlar gerçek model; yargıç deterministik MockJudge. En hızlı/ucuz.
+
+==================================================================
+G2 PİLOT — openai-o4-mini_mockjudge_only-II   (n=8/hücre, 10 hücre)
+Ajan: o4-mini  |  Yargıç: mock
+Başlangıç: 2026-07-08T15:06:58
+==================================================================
+
+### FAZ 1/2 — AJAN KOŞULARI (o4-mini) ###
+
+[1/10] S2/P0  (persona_B=honest)
+    S2/P0 bölüm 5/8  (20.6s/bölüm, kalan ~62s, parse_hata=0)
+    S2/P0 bölüm 8/8  (19.4s/bölüm, kalan ~0s, parse_hata=0)
+
+[2/10] S2/P2_b0.1  (persona_B=honest)
+    S2/P2_b0.1 bölüm 5/8  (19.1s/bölüm, kalan ~57s, parse_hata=0)
+    S2/P2_b0.1 bölüm 8/8  (18.4s/bölüm, kalan ~0s, parse_hata=0)
+
+[3/10] S2/P2_b0.12  (persona_B=honest)
+    S2/P2_b0.12 bölüm 5/8  (26.9s/bölüm, kalan ~81s, parse_hata=0)
+    S2/P2_b0.12 bölüm 8/8  (27.2s/bölüm, kalan ~0s, parse_hata=0)
+
+[4/10] S2/P2_b0.2  (persona_B=honest)
+    S2/P2_b0.2 bölüm 5/8  (28.5s/bölüm, kalan ~85s, parse_hata=0)
+    S2/P2_b0.2 bölüm 8/8  (28.9s/bölüm, kalan ~0s, parse_hata=0)
+
+[5/10] S2/P2_b0.4  (persona_B=honest)
+    S2/P2_b0.4 bölüm 5/8  (27.7s/bölüm, kalan ~83s, parse_hata=0)
+    S2/P2_b0.4 bölüm 8/8  (30.3s/bölüm, kalan ~0s, parse_hata=0)
+
+[6/10] S4/P0  (persona_B=honest)
+    S4/P0 bölüm 5/8  (20.2s/bölüm, kalan ~61s, parse_hata=0)
+    S4/P0 bölüm 8/8  (21.7s/bölüm, kalan ~0s, parse_hata=0)
+
+[7/10] S4/P2_b0.1  (persona_B=honest)
+    S4/P2_b0.1 bölüm 5/8  (21.3s/bölüm, kalan ~64s, parse_hata=0)
+    S4/P2_b0.1 bölüm 8/8  (21.0s/bölüm, kalan ~0s, parse_hata=0)
+
+[8/10] S4/P2_b0.12  (persona_B=honest)
+    S4/P2_b0.12 bölüm 5/8  (23.6s/bölüm, kalan ~71s, parse_hata=0)
+    S4/P2_b0.12 bölüm 8/8  (24.5s/bölüm, kalan ~0s, parse_hata=0)
+
+[9/10] S4/P2_b0.2  (persona_B=honest)
+    S4/P2_b0.2 bölüm 5/8  (22.1s/bölüm, kalan ~66s, parse_hata=0)
+    S4/P2_b0.2 bölüm 8/8  (18.5s/bölüm, kalan ~0s, parse_hata=0)
+
+[10/10] S4/P2_b0.4  (persona_B=honest)
+    S4/P2_b0.4 bölüm 5/8  (21.1s/bölüm, kalan ~63s, parse_hata=0)
+    S4/P2_b0.4 bölüm 8/8  (22.9s/bölüm, kalan ~0s, parse_hata=0)
+
+  FAZ 1 tamam (1861s, toplam parse_hata=0)
+
+### FAZ 2/2 — MockJudge (deterministik, VRAM gerektirmez) ###
+
+[S2] Modül II — teminat doz-yanıtı (b_min≈0.118):
+  proto/b      war%    PBR    xA    WELF
+  P0            100      -     -   0.800
+  P2 b=0.10      88   0.00     -   0.824
+  P2 b=0.12      75   0.60     -   0.808
+  P2 b=0.20      75   0.75     -   0.713
+  P2 b=0.40      25   0.00     -   0.935
+
+[S4] Modül II — teminat doz-yanıtı (b_min≈0.118):
+  proto/b      war%    PBR    xA    WELF
+  P0             88      -     -   0.825
+  P2 b=0.10     100   1.00     -   0.766
+  P2 b=0.12      62   0.57     -   0.819
+  P2 b=0.20      75   0.33     -   0.825
+  P2 b=0.40      88   0.50     -   0.777
+
+==================================================================
+G2 KARAR KRİTERİ
+==================================================================
+  S2: teminat etkisi savaş 1.00(P0)->0.25(P2,b=0.4)  ✓
+  S4: teminat etkisi savaş 0.88(P0)->0.88(P2,b=0.4)  ✗
+
+  SONUÇ: REVİZE — koşulan modül(ler)de beklenen sinyal yok
+  Süre: 1861s (31.0 dk)  |  parse hataları: 0
+  Tüm hücre transkriptleri: out/g2_tx_openai-o4-mini_mockjudge_only-II_*.jsonl (10 hücre)
+
+  Kayıt: out\g2_pilot_openai-o4-mini_mockjudge_only-II.json
+
+  Log dosyası: out\g2_log_openai-o4-mini_mockjudge_only-II.txt

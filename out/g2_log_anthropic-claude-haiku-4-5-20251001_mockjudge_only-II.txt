@@ -1,0 +1,72 @@
+[MOCK-JUDGE] Ajanlar gerçek Ollama; yargıç deterministik MockJudge. VRAM'de tek model — en hızlı.
+
+==================================================================
+G2 PİLOT — anthropic-claude-haiku-4-5-20251001_mockjudge_only-II   (n=4/hücre, 10 hücre)
+Ajan: mock  |  Yargıç: mock
+Başlangıç: 2026-07-06T18:11:59
+==================================================================
+
+### FAZ 1/2 — AJAN KOŞULARI (mock) ###
+
+[1/10] S2/P0  (persona_B=honest)
+    S2/P0 bölüm 4/4  (6.1s/bölüm, kalan ~0s, parse_hata=0)
+
+[2/10] S2/P2_b0.1  (persona_B=honest)
+    S2/P2_b0.1 bölüm 4/4  (6.2s/bölüm, kalan ~0s, parse_hata=0)
+
+[3/10] S2/P2_b0.12  (persona_B=honest)
+    S2/P2_b0.12 bölüm 4/4  (5.6s/bölüm, kalan ~0s, parse_hata=0)
+
+[4/10] S2/P2_b0.2  (persona_B=honest)
+    S2/P2_b0.2 bölüm 4/4  (8.7s/bölüm, kalan ~0s, parse_hata=0)
+
+[5/10] S2/P2_b0.4  (persona_B=honest)
+    S2/P2_b0.4 bölüm 4/4  (6.2s/bölüm, kalan ~0s, parse_hata=0)
+
+[6/10] S4/P0  (persona_B=honest)
+    S4/P0 bölüm 4/4  (6.9s/bölüm, kalan ~0s, parse_hata=0)
+
+[7/10] S4/P2_b0.1  (persona_B=honest)
+    S4/P2_b0.1 bölüm 4/4  (6.8s/bölüm, kalan ~0s, parse_hata=0)
+
+[8/10] S4/P2_b0.12  (persona_B=honest)
+    S4/P2_b0.12 bölüm 4/4  (8.1s/bölüm, kalan ~0s, parse_hata=0)
+
+[9/10] S4/P2_b0.2  (persona_B=honest)
+    S4/P2_b0.2 bölüm 4/4  (6.8s/bölüm, kalan ~0s, parse_hata=0)
+
+[10/10] S4/P2_b0.4  (persona_B=honest)
+    S4/P2_b0.4 bölüm 4/4  (8.7s/bölüm, kalan ~0s, parse_hata=0)
+
+  FAZ 1 tamam (281s, toplam parse_hata=0)
+
+### FAZ 2/2 — MockJudge (deterministik, VRAM gerektirmez) ###
+
+[S2] Modül II — teminat doz-yanıtı (b_min≈0.118):
+  proto/b      war%    PBR    xA    WELF
+  P0            100      -     -   0.800
+  P2 b=0.10      75   0.50     -   0.826
+  P2 b=0.12      75   0.00     -   0.849
+  P2 b=0.20      75   0.00     -   0.847
+  P2 b=0.40      25   0.00     -   0.935
+
+[S4] Modül II — teminat doz-yanıtı (b_min≈0.118):
+  proto/b      war%    PBR    xA    WELF
+  P0            100      -     -   0.800
+  P2 b=0.10      50   0.50     -   0.853
+  P2 b=0.12      50   0.50     -   0.843
+  P2 b=0.20      50   0.50     -   0.805
+  P2 b=0.40      50   0.50     -   0.710
+
+==================================================================
+G2 KARAR KRİTERİ
+==================================================================
+  S2: teminat etkisi savaş 1.00(P0)->0.25(P2,b=0.4)  ✓
+  S4: teminat etkisi savaş 1.00(P0)->0.50(P2,b=0.4)  ✓
+
+  SONUÇ: GEÇ — koşulan modül(ler)de protokol etkisi gözlendi
+  Süre: 281s (4.7 dk)  |  parse hataları: 0
+
+  Kayıt: out\g2_pilot_anthropic-claude-haiku-4-5-20251001_mockjudge_only-II.json
+
+  Log dosyası: out\g2_log_anthropic-claude-haiku-4-5-20251001_mockjudge_only-II.txt

@@ -1,0 +1,11 @@
+[MOCK-JUDGE] Ajanlar gerçek model; yargıç deterministik MockJudge. En hızlı/ucuz.
+
+==================================================================
+G2 PİLOT — qwen-qwq-plus_mockjudge_only-S2_b-0.10-0.40   (n=4/hücre, 3 hücre)
+Ajan: qwq-plus  |  Yargıç: mock
+Başlangıç: 2026-07-08T19:15:41
+==================================================================
+
+### FAZ 1/2 — AJAN KOŞULARI (qwq-plus) ###
+
+[1/3] S2/P0  (persona_B=honest)

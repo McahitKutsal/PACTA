@@ -1,0 +1,45 @@
+[MOCK MODU] Gerçek model kullanılmıyor — boru hattı önizlemesi.
+
+==================================================================
+G2 PİLOT — mock-preview_only-S6   (n=30/15 (birincil/ikincil), 11 hücre, 240 bölüm)
+Ajan: mock  |  Yargıç: mock
+Başlangıç: 2026-07-11T15:41:35
+==================================================================
+
+### FAZ 1/2 — AJAN KOŞULARI (mock) ###
+
+[1/11] S6/P0  (persona_B=honest, n=30)
+    S6/P0 bölüm 5/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=5)
+    S6/P0 bölüm 10/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=10)
+    S6/P0 bölüm 15/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=15)
+    S6/P0 bölüm 20/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=20)
+    S6/P0 bölüm 25/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=25)
+    S6/P0 bölüm 30/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=30)
+
+[2/11] S6/P2_b0.0  (persona_B=honest, n=15)
+    S6/P2_b0.0 bölüm 5/15  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=5)
+    S6/P2_b0.0 bölüm 10/15  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=10)
+    S6/P2_b0.0 bölüm 15/15  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=15)
+
+[3/11] S6/P2_b0.05  (persona_B=honest, n=15)
+    S6/P2_b0.05 bölüm 5/15  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=5)
+    S6/P2_b0.05 bölüm 10/15  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=10)
+    S6/P2_b0.05 bölüm 15/15  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=15)
+
+[4/11] S6/P2_b0.1  (persona_B=honest, n=30)
+    S6/P2_b0.1 bölüm 5/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=5)
+    S6/P2_b0.1 bölüm 10/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=10)
+    S6/P2_b0.1 bölüm 15/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=15)
+    S6/P2_b0.1 bölüm 20/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=20)
+    S6/P2_b0.1 bölüm 25/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=25)
+    S6/P2_b0.1 bölüm 30/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=30)
+
+[5/11] S6/P2_b0.118  (persona_B=honest, n=30)
+    S6/P2_b0.118 bölüm 5/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=5)
+    S6/P2_b0.118 bölüm 10/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=10)
+    S6/P2_b0.118 bölüm 15/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=15)
+    S6/P2_b0.118 bölüm 20/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=20)
+    S6/P2_b0.118 bölüm 25/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=25)
+    S6/P2_b0.118 bölüm 30/30  (0.0s/bölüm, kalan ~0s, parse_hata=0, tamam=30)
+
+[6/11] S6/P2_b0.15  (persona_B=honest, n=30)

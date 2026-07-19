@@ -1,0 +1,75 @@
+[GERÇEK] API yargıç: OpenAI (iki-fazlı).
+
+==================================================================
+G2 PİLOT — qwen-deepseek-v4-flash_judge-openai-gpt-4o-mini   (n=8/hücre, 16 hücre)
+Ajan: deepseek-v4-flash  |  Yargıç: gpt-4o-mini
+Başlangıç: 2026-07-10T18:07:13
+==================================================================
+
+### FAZ 1/2 — AJAN KOŞULARI (deepseek-v4-flash) ###
+
+[1/16] S1/P0  (persona_B=deceptive)
+    S1/P0 bölüm 5/8  (76.7s/bölüm, kalan ~230s, parse_hata=0, tamam=5)
+    S1/P0 bölüm 8/8  (75.2s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[2/16] S1/P1  (persona_B=deceptive)
+    S1/P1 bölüm 5/8  (78.4s/bölüm, kalan ~235s, parse_hata=0, tamam=5)
+    S1/P1 bölüm 8/8  (83.6s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[3/16] S1/P3  (persona_B=deceptive)
+    S1/P3 bölüm 5/8  (91.7s/bölüm, kalan ~275s, parse_hata=0, tamam=5)
+    S1/P3 bölüm 8/8  (103.2s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[4/16] S3/P0  (persona_B=deceptive)
+    S3/P0 bölüm 5/8  (111.1s/bölüm, kalan ~333s, parse_hata=0, tamam=5)
+    S3/P0 bölüm 8/8  (113.6s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[5/16] S3/P1  (persona_B=deceptive)
+    S3/P1 bölüm 5/8  (133.7s/bölüm, kalan ~401s, parse_hata=0, tamam=5)
+    S3/P1 bölüm 8/8  (136.1s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[6/16] S3/P3  (persona_B=deceptive)
+    S3/P3 bölüm 5/8  (136.9s/bölüm, kalan ~411s, parse_hata=0, tamam=5)
+    S3/P3 bölüm 8/8  (131.4s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[7/16] S2/P0  (persona_B=honest)
+    S2/P0 bölüm 5/8  (154.1s/bölüm, kalan ~462s, parse_hata=0, tamam=5)
+    S2/P0 bölüm 8/8  (145.7s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[8/16] S2/P2_b0.1  (persona_B=honest)
+    S2/P2_b0.1 bölüm 5/8  (105.7s/bölüm, kalan ~317s, parse_hata=0, tamam=5)
+    S2/P2_b0.1 bölüm 8/8  (103.1s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[9/16] S2/P2_b0.12  (persona_B=honest)
+    S2/P2_b0.12 bölüm 5/8  (87.6s/bölüm, kalan ~263s, parse_hata=0, tamam=5)
+    S2/P2_b0.12 bölüm 8/8  (83.0s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[10/16] S2/P2_b0.2  (persona_B=honest)
+    S2/P2_b0.2 bölüm 5/8  (87.4s/bölüm, kalan ~262s, parse_hata=0, tamam=5)
+    S2/P2_b0.2 bölüm 8/8  (85.1s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[11/16] S2/P2_b0.4  (persona_B=honest)
+    S2/P2_b0.4 bölüm 5/8  (97.4s/bölüm, kalan ~292s, parse_hata=0, tamam=5)
+    S2/P2_b0.4 bölüm 8/8  (109.4s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[12/16] S4/P0  (persona_B=honest)
+    S4/P0 bölüm 5/8  (44.9s/bölüm, kalan ~135s, parse_hata=0, tamam=5)
+    S4/P0 bölüm 8/8  (50.4s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[13/16] S4/P2_b0.1  (persona_B=honest)
+    S4/P2_b0.1 bölüm 5/8  (43.0s/bölüm, kalan ~129s, parse_hata=0, tamam=5)
+    S4/P2_b0.1 bölüm 8/8  (50.8s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[14/16] S4/P2_b0.12  (persona_B=honest)
+    S4/P2_b0.12 bölüm 5/8  (62.8s/bölüm, kalan ~188s, parse_hata=0, tamam=5)
+    S4/P2_b0.12 bölüm 8/8  (68.1s/bölüm, kalan ~0s, parse_hata=0, tamam=8)
+
+[15/16] S4/P2_b0.2  (persona_B=honest)
+    S4/P2_b0.2 bölüm 0 KALICI HATA (PermissionDeniedError: Error code: 403 - {'error': {'message': 'The free quota has been exhausted. To continue accessing th) — retry anlamsız, koşum DURDURULUYOR.
+
+==================================================================
+[DURDURULDU] Kalıcı API hatası — koşum sonlandırıldı:
+  PermissionDeniedError: Error code: 403 - {'error': {'message': 'The free quota has been exhausted. To continue accessing the model on a paid basis, please complete your payment information （or disable th
+==================================================================
+  Neden: kota/kimlik/model hatası retry ile düzelmez; kalan bölümleri denemek saatlerce boşa retry+ATLA olurdu (bu yüzden erken durduruldu).
+  Yapılacak: sağlayıcı bakiyesi/kotasını yükle ya da farklı rota kullan (ör. .env → OPENAI_BASE_URL=https://openrouter.ai/api/v1 üzerinden Qwen), sonra aynı komutu yeniden koş.

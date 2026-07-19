@@ -1,0 +1,29 @@
+[GERÇEK] API yargıç: Anthropic (iki-fazlı).
+
+==================================================================
+G2 PİLOT — openai-gpt-5_judge-anthropic-claude-haiku-4-5_only-II   (n=2/hücre, 10 hücre)
+Ajan: gpt-5  |  Yargıç: claude-haiku-4-5
+Başlangıç: 2026-07-06T22:55:15
+==================================================================
+
+### FAZ 1/2 — AJAN KOŞULARI (gpt-5) ###
+
+[1/10] S2/P0  (persona_B=honest)
+    S2/P0 bölüm 2/2  (204.6s/bölüm, kalan ~0s, parse_hata=2)
+
+[2/10] S2/P2_b0.1  (persona_B=honest)
+    S2/P2_b0.1 bölüm 2/2  (282.3s/bölüm, kalan ~0s, parse_hata=1)
+
+[3/10] S2/P2_b0.12  (persona_B=honest)
+    S2/P2_b0.12 bölüm 2/2  (280.5s/bölüm, kalan ~0s, parse_hata=2)
+
+[4/10] S2/P2_b0.2  (persona_B=honest)
+    S2/P2_b0.2 bölüm 2/2  (273.0s/bölüm, kalan ~0s, parse_hata=1)
+
+[5/10] S2/P2_b0.4  (persona_B=honest)
+    S2/P2_b0.4 bölüm 2/2  (261.1s/bölüm, kalan ~0s, parse_hata=1)
+
+[6/10] S4/P0  (persona_B=honest)
+    S4/P0 bölüm 2/2  (239.0s/bölüm, kalan ~0s, parse_hata=1)
+
+[7/10] S4/P2_b0.1  (persona_B=honest)

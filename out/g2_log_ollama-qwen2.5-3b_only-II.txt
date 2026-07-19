@@ -1,0 +1,25 @@
+[GERÇEK] Ajan+yargıç Ollama (iki-fazlı, VRAM yönetimli).
+
+==================================================================
+G2 PİLOT — ollama-qwen2.5-3b_only-II   (n=8/hücre, 10 hücre)
+Ajan: qwen2.5:3b  |  Yargıç: gemma3:4b
+Başlangıç: 2026-07-06T11:31:11
+==================================================================
+
+### FAZ 1/2 — AJAN KOŞULARI (qwen2.5:3b) ###
+    [VRAM] qwen2.5:3b yüklendi (4s)
+
+[1/10] S2/P0  (persona_B=honest)
+    S2/P0 bölüm 5/8  (6.3s/bölüm, kalan ~19s, parse_hata=0)
+    S2/P0 bölüm 8/8  (6.3s/bölüm, kalan ~0s, parse_hata=0)
+
+[2/10] S2/P2_b0.1  (persona_B=honest)
+    S2/P2_b0.1 bölüm 5/8  (6.4s/bölüm, kalan ~19s, parse_hata=0)
+    S2/P2_b0.1 bölüm 8/8  (6.4s/bölüm, kalan ~0s, parse_hata=0)
+
+[3/10] S2/P2_b0.12  (persona_B=honest)
+    S2/P2_b0.12 bölüm 5/8  (6.3s/bölüm, kalan ~19s, parse_hata=0)
+    S2/P2_b0.12 bölüm 8/8  (6.3s/bölüm, kalan ~0s, parse_hata=0)
+
+[4/10] S2/P2_b0.2  (persona_B=honest)
+    S2/P2_b0.2 bölüm 5/8  (6.3s/bölüm, kalan ~19s, parse_hata=0)

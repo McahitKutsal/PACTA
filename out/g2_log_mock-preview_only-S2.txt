@@ -1,0 +1,48 @@
+[MOCK MODU] Gerçek model kullanılmıyor — boru hattı önizlemesi.
+
+==================================================================
+G2 PİLOT — mock-preview_only-S2   (n=1/hücre, 5 hücre)
+Ajan: mock  |  Yargıç: mock
+Başlangıç: 2026-07-06T22:52:34
+==================================================================
+
+### FAZ 1/2 — AJAN KOŞULARI (mock) ###
+
+[1/5] S2/P0  (persona_B=honest)
+    S2/P0 bölüm 1/1  (0.0s/bölüm, kalan ~0s, parse_hata=0)
+
+[2/5] S2/P2_b0.1  (persona_B=honest)
+    S2/P2_b0.1 bölüm 1/1  (0.0s/bölüm, kalan ~0s, parse_hata=0)
+
+[3/5] S2/P2_b0.12  (persona_B=honest)
+    S2/P2_b0.12 bölüm 1/1  (0.0s/bölüm, kalan ~0s, parse_hata=0)
+
+[4/5] S2/P2_b0.2  (persona_B=honest)
+    S2/P2_b0.2 bölüm 1/1  (0.0s/bölüm, kalan ~0s, parse_hata=0)
+
+[5/5] S2/P2_b0.4  (persona_B=honest)
+    S2/P2_b0.4 bölüm 1/1  (0.0s/bölüm, kalan ~0s, parse_hata=0)
+
+  FAZ 1 tamam (0s, toplam parse_hata=0)
+
+### FAZ 2/2 — MockJudge (deterministik, VRAM gerektirmez) ###
+
+[S2] Modül II — teminat doz-yanıtı (b_min≈0.118):
+  proto/b      war%    PBR    xA    WELF
+  P0            100      -     -   0.800
+  P2 b=0.10     100   0.00     -   0.800
+  P2 b=0.12       0   0.00    40   0.994
+  P2 b=0.20       0   0.00    47   0.990
+  P2 b=0.40       0   0.00    58   0.980
+
+==================================================================
+G2 KARAR KRİTERİ
+==================================================================
+  S2: teminat etkisi savaş 1.00(P0)->0.00(P2,b=0.4)  ✓
+
+  SONUÇ: GEÇ — koşulan modül(ler)de protokol etkisi gözlendi
+  Süre: 0s (0.0 dk)  |  parse hataları: 0
+
+  Kayıt: out\g2_pilot_mock-preview_only-S2.json
+
+  Log dosyası: out\g2_log_mock-preview_only-S2.txt

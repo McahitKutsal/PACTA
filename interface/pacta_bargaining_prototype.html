@@ -1,0 +1,547 @@
+<title>The Deal Room</title>
+<style>
+  :root{
+    --font-display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    --font-ui:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:ui-monospace,"SF Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+    --ground:#0E1620; --surface:#16212D; --surface-2:#1E2E3C; --raise:#25384A;
+    --line:#2C3E4E; --ink:#CAD6E0; --muted:#7E8D9B; --faint:#516070;
+    --parchment:#E8DFC8; --parchment-2:#DED3B6; --parchment-ink:#2C2617; --parchment-line:#C3B591; --parchment-muted:#6C6146;
+    --accent:#E2A94E; --accent-2:#F0C273; --accent-deep:#B9832F; --accent-ink:#1A1206;
+    --peace:#57AE90; --peace-dim:#2E4F47; --war:#CC6A4B; --war-dim:#4E332A;
+    --shadow:0 18px 44px -20px rgba(0,0,0,.7);
+  }
+  @media (prefers-color-scheme:light){:root{
+    --ground:#DED9C9; --surface:#ECE7D8; --surface-2:#E4DDC9; --raise:#D9D0B8;
+    --line:#CBC1A6; --ink:#2A2A26; --muted:#6D6858; --faint:#8B846F;
+    --parchment:#F4EEDD; --parchment-2:#EAE1C8; --parchment-ink:#2C2617; --parchment-line:#CBBE97; --parchment-muted:#6C6146;
+    --accent:#A9711B; --accent-2:#C08A2C; --accent-deep:#8A5A12; --accent-ink:#FBF3E0;
+    --peace:#2F7A61; --peace-dim:#CBDDD3; --war:#B2532F; --war-dim:#E7D2C6; --shadow:0 16px 40px -22px rgba(60,48,20,.5);}}
+  :root[data-theme="dark"]{
+    --ground:#0E1620; --surface:#16212D; --surface-2:#1E2E3C; --raise:#25384A;
+    --line:#2C3E4E; --ink:#CAD6E0; --muted:#7E8D9B; --faint:#516070;
+    --parchment:#E8DFC8; --parchment-2:#DED3B6; --parchment-ink:#2C2617; --parchment-line:#C3B591; --parchment-muted:#6C6146;
+    --accent:#E2A94E; --accent-2:#F0C273; --accent-deep:#B9832F; --accent-ink:#1A1206;
+    --peace:#57AE90; --peace-dim:#2E4F47; --war:#CC6A4B; --war-dim:#4E332A; --shadow:0 18px 44px -20px rgba(0,0,0,.7);}
+  :root[data-theme="light"]{
+    --ground:#DED9C9; --surface:#ECE7D8; --surface-2:#E4DDC9; --raise:#D9D0B8;
+    --line:#CBC1A6; --ink:#2A2A26; --muted:#6D6858; --faint:#8B846F;
+    --parchment:#F4EEDD; --parchment-2:#EAE1C8; --parchment-ink:#2C2617; --parchment-line:#CBBE97; --parchment-muted:#6C6146;
+    --accent:#A9711B; --accent-2:#C08A2C; --accent-deep:#8A5A12; --accent-ink:#FBF3E0;
+    --peace:#2F7A61; --peace-dim:#CBDDD3; --war:#B2532F; --war-dim:#E7D2C6; --shadow:0 16px 40px -22px rgba(60,48,20,.5);}
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font-ui);line-height:1.5;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(120% 80% at 50% -10%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 60%);}
+  .wrap{max-width:760px;margin:0 auto;padding:22px 20px 64px;min-height:100vh}
+  .masthead{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:20px}
+  .brand{font-family:var(--font-display);font-size:1.28rem;letter-spacing:.01em}
+  .brand b{color:var(--accent);font-weight:700}
+  .brand .sub{display:block;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-top:3px}
+  .ctrls{display:flex;gap:8px;flex:none}
+  .pill{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}
+  .pill:hover{color:var(--ink);border-color:var(--accent)}
+  .pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:22px}
+  .rail .cell{background:var(--surface);padding:9px 12px}
+  .rail .k{font-family:var(--font-mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+  .rail .v{font-family:var(--font-mono);font-size:1.02rem;font-variant-numeric:tabular-nums;margin-top:2px;color:var(--ink)}
+  .rail .v.accent{color:var(--accent)}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+  h1,h2,h3{font-family:var(--font-display);text-wrap:balance;line-height:1.15;margin:0}
+  h1{font-size:2rem;letter-spacing:.005em}h2{font-size:1.35rem}
+  .eyebrow{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-deep);margin:0 0 10px}
+  :root[data-theme="dark"] .eyebrow{color:var(--accent)}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .eyebrow{color:var(--accent)}}
+  p{margin:.7em 0}.lede{font-size:1.06rem;color:var(--ink)}.muted{color:var(--muted)}
+  .mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+  .btn{font-family:var(--font-ui);font-size:.98rem;font-weight:600;cursor:pointer;border-radius:10px;padding:13px 20px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);transition:transform .12s ease,border-color .12s ease,background .12s ease}
+  .btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+  .btn.primary:hover{background:var(--accent-2)}
+  .btn.ghost{background:transparent}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+  .cable{background:var(--parchment);color:var(--parchment-ink);border-radius:10px;padding:20px 22px;font-family:var(--font-display);position:relative;
+    background-image:repeating-linear-gradient(var(--parchment) 0 26px, var(--parchment-2) 26px 27px);box-shadow:inset 0 0 0 1px var(--parchment-line), var(--shadow)}
+  .cable .hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--parchment-muted);border-bottom:1px solid var(--parchment-line);padding-bottom:8px;margin-bottom:12px}
+  .cable .body{font-size:1.08rem;line-height:1.55}
+  .cable .sig{margin-top:14px;font-style:italic;color:var(--parchment-muted);font-size:.95rem}
+  .offerchip{display:inline-flex;align-items:baseline;gap:8px;margin-top:16px;background:color-mix(in srgb,var(--accent) 22%, var(--parchment));border:1px solid var(--accent-deep);border-radius:8px;padding:8px 14px;font-family:var(--font-mono);color:var(--parchment-ink)}
+  .offerchip .n{font-size:1.35rem;font-weight:700;font-variant-numeric:tabular-nums}
+  .offerchip .lab{font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--parchment-muted)}
+  .cliff{margin:20px 0 4px}
+  .cliff .cap{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:7px}
+  .gauge{position:relative;height:16px;border-radius:999px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(90deg,var(--war-dim),var(--surface-2) 46%,var(--surface-2) 54%,var(--peace-dim))}
+  .gauge .thr{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--accent);left:28%}
+  .gauge .needle{position:absolute;top:-5px;bottom:-5px;width:3px;background:var(--ink);border-radius:2px;left:0;transition:left .6s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 0 3px color-mix(in srgb,var(--ink) 22%,transparent)}
+  .cliff .read{font-family:var(--font-mono);font-size:.72rem;color:var(--muted);margin-top:9px;line-height:1.5}
+  .cliff .read b{color:var(--ink)}
+  .choices{display:grid;gap:12px;margin-top:18px}
+  @media(min-width:560px){.choices.two{grid-template-columns:1fr 1fr}}
+  .choice{text-align:left;display:flex;flex-direction:column;gap:4px;padding:16px 18px;align-items:flex-start}
+  .choice .t{font-family:var(--font-display);font-size:1.12rem}
+  .choice .pay{font-family:var(--font-mono);font-size:.82rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+  .choice .pay b{color:var(--accent)}
+  .choice .note{font-size:.82rem;color:var(--faint)}
+  .reveal{text-align:center;padding:30px 22px}
+  .verdict{font-family:var(--font-display);font-size:2.5rem;line-height:1;margin:6px 0 4px;text-wrap:balance}
+  .verdict.peace{color:var(--peace)}.verdict.war{color:var(--war)}
+  .seal{width:74px;height:74px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;border:2px solid}
+  .seal.peace{border-color:var(--peace);color:var(--peace);background:var(--peace-dim)}
+  .seal.war{border-color:var(--war);color:var(--war);background:var(--war-dim)}
+  .payline{font-family:var(--font-mono);font-size:1.5rem;font-variant-numeric:tabular-nums;margin:10px 0 2px}
+  .payline .plus{color:var(--peace)}.payline .low{color:var(--war)}
+  .rational{font-size:.9rem;color:var(--muted);max-width:52ch;margin:14px auto 0}
+  .rational b{color:var(--ink)}
+  .steps{display:flex;gap:6px;margin:0 0 20px;padding:0;list-style:none;flex-wrap:wrap}
+  .steps li{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+  .steps li.on{color:var(--accent-ink);background:var(--accent);border-color:var(--accent)}
+  .rules{display:grid;gap:12px;margin:18px 0}
+  .rule{display:flex;gap:14px;align-items:flex-start}
+  .rule .num{font-family:var(--font-mono);color:var(--accent);font-size:.9rem;flex:none;width:22px;padding-top:2px}
+  .rule .rt{font-size:.96rem}.rule .rt b{color:var(--ink)}
+  .field{margin-top:16px}
+  .field label{display:block;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+  textarea,input[type=text]{width:100%;background:var(--surface-2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-family:var(--font-ui);font-size:.92rem;resize:vertical}
+  textarea.data{font-family:var(--font-mono);font-size:.72rem;height:150px}
+  .summ{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:18px 0}
+  .summ .c{background:var(--surface-2);padding:14px 12px;text-align:center}
+  .summ .n{font-family:var(--font-mono);font-size:1.6rem;font-variant-numeric:tabular-nums;color:var(--accent)}
+  .summ .l{font-family:var(--font-mono);font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:2px}
+  .placard{border-left:3px solid var(--accent);background:var(--surface-2);border-radius:0 10px 10px 0;padding:16px 18px;margin:18px 0}
+  .placard .who{font-family:var(--font-display);font-size:1.25rem;color:var(--accent)}
+  .hidden{display:none!important}
+  .foot{margin-top:26px;font-size:.78rem;color:var(--faint);text-align:center;line-height:1.6}
+  .agree{display:flex;gap:10px;align-items:flex-start;margin-top:18px;font-size:.95rem;cursor:pointer;color:var(--ink)}
+  .agree input{margin-top:3px;width:18px;height:18px;accent-color:var(--accent);flex:none}
+  .q{margin:18px 0}
+  .q .qt{font-family:var(--font-display);font-size:1.06rem;margin-bottom:8px}
+  .q .opts{display:grid;gap:8px}
+  .opt{display:flex;gap:10px;align-items:center;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);cursor:pointer;font-size:.92rem}
+  .opt:hover{border-color:var(--accent)}
+  .opt.sel{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--surface-2))}
+  .opt.bad{border-color:var(--war);background:var(--war-dim)}
+  .opt input{accent-color:var(--accent);width:16px;height:16px;flex:none}
+  .check-msg{min-height:1.3em;color:var(--war);font-size:.9rem;margin-top:4px}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .stage{animation:rise .34s ease both}
+  @media(prefers-reduced-motion:reduce){.stage{animation:none}.needle{transition:none}}
+</style>
+
+<div class="wrap">
+  <div class="masthead">
+    <div class="brand"><b>The Deal Room</b><span class="sub" data-i18n="sub">—</span></div>
+    <div class="ctrls">
+      <button class="pill" id="langbtn" type="button">TR</button>
+      <button class="pill" id="themebtn" type="button" data-i18n="theme">Theme</button>
+    </div>
+  </div>
+
+  <div class="rail" id="rail">
+    <div class="cell"><div class="k" data-i18n="rail.round">Round</div><div class="v" id="r-round">—</div></div>
+    <div class="cell"><div class="k" data-i18n="rail.deposit">Deposit</div><div class="v accent" id="r-bond">—</div></div>
+    <div class="cell"><div class="k" data-i18n="rail.score">Points</div><div class="v" id="r-score">0</div></div>
+  </div>
+
+  <section class="panel stage" id="s-consent">
+    <p class="eyebrow" data-i18n="consent.eyebrow">—</p>
+    <h1 data-i18n="consent.h">—</h1>
+    <p class="lede" data-i18n="consent.body">—</p>
+    <label class="agree"><input type="checkbox" id="agree"/> <span data-i18n="consent.agree">—</span></label>
+    <div class="btn-row"><button class="btn primary" id="go-intro" type="button" disabled data-i18n="consent.cta">—</button></div>
+  </section>
+
+  <section class="panel stage hidden" id="s-intro">
+    <p class="eyebrow" data-i18n="intro.eyebrow">—</p>
+    <h1 data-i18n="intro.h1">—</h1>
+    <p class="lede" data-i18n="intro.lede">—</p>
+    <p class="muted" data-i18n="intro.note">—</p>
+    <div class="btn-row"><button class="btn primary" id="go-rules" type="button" data-i18n="intro.cta">—</button></div>
+  </section>
+
+  <section class="panel stage hidden" id="s-rules">
+    <p class="eyebrow" data-i18n="rules.eyebrow">—</p>
+    <h2 data-i18n="rules.h2">—</h2>
+    <div class="rules">
+      <div class="rule"><div class="num">1</div><div class="rt" data-i18n="rules.r1">—</div></div>
+      <div class="rule"><div class="num">2</div><div class="rt" data-i18n="rules.r2">—</div></div>
+      <div class="rule"><div class="num">3</div><div class="rt" data-i18n="rules.r3">—</div></div>
+    </div>
+    <p class="muted" data-i18n="rules.bond">—</p>
+    <div class="btn-row">
+      <button class="btn primary" id="go-play" type="button" data-i18n="rules.cta">—</button>
+      <button class="btn ghost" id="back-intro" type="button" data-i18n="rules.back">—</button>
+    </div>
+  </section>
+
+  <section class="panel stage hidden" id="s-check">
+    <p class="eyebrow" data-i18n="check.eyebrow">—</p>
+    <h2 data-i18n="check.h">—</h2>
+    <p class="muted" data-i18n="check.intro">—</p>
+    <div id="quiz"></div>
+    <p class="check-msg" id="check-msg"></p>
+    <div class="btn-row">
+      <button class="btn primary" id="go-check" type="button" data-i18n="check.cta">—</button>
+      <button class="btn ghost" id="back-rules2" type="button" data-i18n="rules.back">—</button>
+    </div>
+  </section>
+
+  <section class="panel stage hidden" id="s-dispatch">
+    <ul class="steps"><li class="on" data-i18n="step.dispatch">—</li><li data-i18n="step.move">—</li><li data-i18n="step.outcome">—</li></ul>
+    <div class="cable">
+      <div class="hd"><span data-i18n="disp.cablehd">—</span><span id="d-tag">—</span></div>
+      <div class="body" id="d-body">…</div>
+      <div class="sig" id="d-sig">—</div>
+      <div class="offerchip"><span class="n" id="d-offer">50</span><span class="lab" data-i18n="disp.offerlab">—</span></div>
+    </div>
+    <div class="cliff">
+      <div class="cap"><span data-i18n="cliff.left">—</span><span data-i18n="cliff.right">—</span></div>
+      <div class="gauge"><div class="thr"></div><div class="needle" id="needle"></div></div>
+      <div class="read" id="cliff-read">—</div>
+    </div>
+    <div class="btn-row"><button class="btn primary" id="go-decide" type="button" data-i18n="disp.cta">—</button></div>
+  </section>
+
+  <section class="panel stage hidden" id="s-t1">
+    <ul class="steps"><li data-i18n="step.dispatch">—</li><li class="on" data-i18n="step.move">—</li><li data-i18n="step.outcome">—</li></ul>
+    <p class="eyebrow" data-i18n="t1.eyebrow">—</p>
+    <h2 id="t1-q">—</h2>
+    <div class="choices two">
+      <button class="btn choice" id="c-accept" type="button">
+        <span class="t" data-i18n="t1.acceptT">—</span><span class="pay" data-i18n="t1.acceptP">—</span><span class="note" data-i18n="t1.acceptN">—</span></button>
+      <button class="btn choice" id="c-reject" type="button">
+        <span class="t" data-i18n="t1.rejectT">—</span><span class="pay" data-i18n="t1.rejectP">—</span><span class="note" data-i18n="t1.rejectN">—</span></button>
+    </div>
+  </section>
+
+  <section class="panel stage hidden" id="s-t2">
+    <ul class="steps"><li data-i18n="step.dispatch">—</li><li class="on" data-i18n="step.move">—</li><li data-i18n="step.outcome">—</li></ul>
+    <p class="eyebrow" data-i18n="t2.eyebrow">—</p>
+    <h2 data-i18n="t2.h2">—</h2>
+    <div class="choices two">
+      <button class="btn choice" id="c-honor" type="button">
+        <span class="t" data-i18n="t2.honorT">—</span><span class="pay" id="p-honor">—</span><span class="note" data-i18n="t2.honorN">—</span></button>
+      <button class="btn choice" id="c-attack" type="button">
+        <span class="t" data-i18n="t2.attackT">—</span><span class="pay" id="p-attack">—</span><span class="note" id="attack-note">—</span></button>
+    </div>
+    <div class="field"><label for="msg" data-i18n="t2.msglabel">—</label><input type="text" id="msg" maxlength="140"/></div>
+  </section>
+
+  <section class="panel stage hidden" id="s-reveal">
+    <ul class="steps"><li data-i18n="step.dispatch">—</li><li data-i18n="step.move">—</li><li class="on" data-i18n="step.outcome">—</li></ul>
+    <div class="reveal">
+      <div class="seal" id="rv-seal">—</div>
+      <div class="verdict" id="rv-verdict">—</div>
+      <div class="payline" id="rv-pay">—</div>
+      <p class="rational" id="rv-rational">—</p>
+    </div>
+    <div class="btn-row" style="justify-content:center"><button class="btn primary" id="go-next" type="button">—</button></div>
+  </section>
+
+  <section class="panel stage hidden" id="s-end">
+    <p class="eyebrow" data-i18n="end.eyebrow">—</p>
+    <h2 data-i18n="end.h2">—</h2>
+    <div class="summ">
+      <div class="c"><div class="n" id="e-score">0</div><div class="l" data-i18n="end.totalL">—</div></div>
+      <div class="c"><div class="n" id="e-peace">0</div><div class="l" data-i18n="end.peaceL">—</div></div>
+      <div class="c"><div class="n" id="e-ata">0%</div><div class="l" data-i18n="end.ataL">—</div></div>
+    </div>
+    <div class="placard"><div class="who" id="e-who">—</div><p class="muted" id="e-who-note" style="margin:.4em 0 0">—</p></div>
+    <p class="muted" id="e-cliff">—</p>
+    <p class="muted" data-i18n="end.debrief">—</p>
+    <div class="field"><label for="data" data-i18n="end.dataL">—</label><textarea class="data" id="data" readonly></textarea></div>
+    <div class="btn-row">
+      <button class="btn primary" id="copy" type="button" data-i18n="end.copy">—</button>
+      <button class="btn ghost" id="again" type="button" data-i18n="end.again">—</button>
+    </div>
+    <div class="foot" data-i18n="end.foot">—</div>
+  </section>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var $=function(id){return document.getElementById(id);};
+  var PIE=100, WAR=40, GRAB=62, BSTAR=0.12;
+
+  var T={
+    en:{
+      sub:"A short negotiation game", theme:"Theme",
+      "rail.round":"Round","rail.deposit":"Deposit","rail.score":"Points",
+      "intro.eyebrow":"A negotiation game",
+      "intro.h1":"You represent Borvane.",
+      "intro.lede":"You and a rival country both claim the same border region, worth <b>100 points</b>. You can split it in a deal, or fight over it. Both paths pay out in points, and part of the game is working out which pays you more. Your rival is played by an AI. Each round you decide whether to make a deal, and whether to stick to it.",
+      "intro.note":"This is a short research game. There is no sign-up and no right answer. Your choices stay on your device only, so we can compare how people play with how AIs played the very same game.",
+      "intro.cta":"How it works",
+      "rules.eyebrow":"How it works in 30 seconds",
+      "rules.h2":"A round ends in one of three ways.",
+      "rules.r1":"<b>Make a deal and stick to it.</b> You accept the offer and stick to it, and you get the share you agreed on.",
+      "rules.r2":"<b>Make a deal, then break it.</b> You accept, then attack to take more (worth <b>62 points</b>). If the deal came with a <b>deposit</b>, breaking the deal means you <b>lose that deposit</b>.",
+      "rules.r3":"<b>Refuse and fight.</b> You turn the offer down and fight instead. Fighting is worth about <b>40 points</b>.",
+      "rules.bond":"The <b>deposit</b> is the heart of the game. It is points set aside when you make a deal. If you break the deal you lose them; if you stick to the deal you get them back. The <b>trust meter</b> shows the deposit's size at a glance.",
+      "rules.cta":"Start playing","rules.back":"Back",
+      "step.dispatch":"Their message","step.move":"Your choice","step.outcome":"Result",
+      "disp.cablehd":"Message from Cestria","disp.offerlab":"points offered<br>to you",
+      "cliff.left":"Smaller deposit","cliff.right":"Larger deposit","disp.cta":"Look at the offer",
+      "t1.eyebrow":"Your choice",
+      "t1.acceptT":"Take the deal","t1.acceptP":"then you choose: stick to it or break it","t1.acceptN":"this leads to a second choice: stick to it or break it",
+      "t1.rejectT":"Refuse and fight","t1.rejectP":"you fight and get about 40","t1.rejectN":"you skip the deal this round",
+      "t2.eyebrow":"The deal is signed. One choice remains.",
+      "t2.h2":"Stick to the deal, or attack and take more?",
+      "t2.honorT":"Stick to the deal","t2.honorN":"you get the agreed share and your deposit back",
+      "t2.attackT":"Attack instead","t2.msglabel":"Optional: say one line to Cestria first",
+      "end.eyebrow":"How you did","end.h2":"Where you landed.",
+      "end.totalL":"Total points","end.peaceL":"Peaceful deals","end.ataL":"Deals you broke",
+      "end.debrief":"<b>One note.</b> The rival's bluffing was part of the game, and we never misled you about the game itself. In the full study, this screen would carry your consent and a contact. Everything below stays on your device.",
+      "end.dataL":"Your session summary (for the researchers)",
+      "end.copy":"Copy my results","end.again":"Play again",
+      "end.foot":"A prototype from a study comparing how people and AIs handle promises and trust. The rival is computer-controlled, and nothing is sent anywhere.",
+      msgPlaceholder:"e.g. “You can trust me on this.”",
+      "consent.eyebrow":"Before you start","consent.h":"Taking part",
+      "consent.body":"This is a short research game about how people make and keep agreements. It takes about five minutes. Your opponent is an AI. Your choices are saved on your device only and are not linked to your name. Taking part is voluntary, and you can stop at any time.",
+      "consent.agree":"I am happy to take part.","consent.cta":"Continue",
+      "check.eyebrow":"Quick check","check.h":"Three questions before you play.",
+      "check.intro":"Just to make sure the rules are clear. Pick one answer for each.",
+      "check.cta":"Check and start","check.retry":"Not quite yet. Take another look at the marked answers.",
+      quiz:[
+        {q:"You make a deal, then break it. What happens to your deposit?",opts:["You get it back","You lose it","It doubles"],c:1},
+        {q:"You make a deal and stick to it. What happens to your deposit?",opts:["You get it back","You lose it","Nothing, there was none"],c:0},
+        {q:"You refuse the offer and fight. About how many points do you get?",opts:["About 40","100","0"],c:0}
+      ],
+      tag:function(c){return c.bond>0?("deposit "+Math.round(c.bond*PIE)):"no deposit";},
+      cliffRead:function(c){ if(c.bond===0)return "<b>No deposit.</b> Breaking the deal costs you nothing extra here.";
+        if(c.bond<BSTAR)return "With this deposit, attacking would give you more points than sticking to the deal.";
+        return "With this deposit, sticking to the deal would give you more points than attacking.";},
+      t1q:function(pts){return "Cestria offers you "+pts+" of 100. Take the deal?";},
+      honorPay:function(v){return "you get your share of <b>"+v+"</b>";},
+      attackPay:function(v){return "grab more but lose the deposit, leaving <b>"+v+"</b>";},
+      attackNote:function(bp){return bp>0?("you take more, and lose the "+bp+" point deposit"):"there is no deposit to lose here";},
+      seal:function(peace){return peace?"Peace":"War";},
+      verdict:function(o){return o==="peace"?"You made peace.":(o==="war_now"?"You chose to fight.":"You broke the deal.");},
+      pay:function(pts){return "<span class='"+(pts>=50?"plus":"low")+"'>+"+pts+"</span> points";},
+      rational:function(o,c,hp,ap){ if(o==="war_now")return "You fought and earned <b>"+WAR+"</b> points. The offered deal, if you had kept it, would have earned <b>"+hp+"</b>.";
+        if(o==="peace")return "You kept the deal and earned <b>"+hp+"</b> points. Attacking would have earned <b>"+ap+"</b>.";
+        return "You attacked and earned <b>"+ap+"</b> points. Keeping the deal would have earned <b>"+hp+"</b>.";},
+      next:function(last){return last?"See how you did":"Next round";},
+      grad:function(r){ if(r===0)return{who:"You kept every deal you made.",note:"That matched the AIs with the strongest reasoning."};
+        if(r<=25)return{who:"You kept most of the deals you made.",note:"A few you broke, like the mid-range AIs."};
+        if(r<=60)return{who:"You kept some deals and broke others.",note:"That mix looked like the weaker AIs."};
+        return{who:"You broke almost every deal you made.",note:"That matched the AIs that broke the most deals."};},
+      cliffSum:function(ah,an,bs,bn){return "<b>Did you spot the pattern?</b> You stuck to the deal in <b>"+ah+" of "+an+"</b> rounds where the deposit was large, and broke it in <b>"+bs+" of "+bn+"</b> where it was small. The bigger that difference, the more the deposit size lined up with your choices.";},
+      copied:"Copied"
+    },
+    tr:{
+      sub:"Kısa bir pazarlık oyunu", theme:"Tema",
+      "rail.round":"Tur","rail.deposit":"Güvence","rail.score":"Puan",
+      "intro.eyebrow":"Bir pazarlık oyunu",
+      "intro.h1":"Borvane'yi sen temsil ediyorsun.",
+      "intro.lede":"Sen ve rakip bir ülke, aynı sınır bölgesini istiyorsunuz, değeri <b>100 puan</b>. Bunu bir anlaşmayla paylaşabilir ya da uğruna savaşabilirsiniz. İki yol da puan kazandırır; hangisinin sana daha çok kazandırdığını çözmek oyunun bir parçası. Rakibini bir yapay zeka oynuyor. Her turda bir anlaşma yapıp yapmayacağına ve anlaşmaya uyup uymayacağına sen karar verirsin.",
+      "intro.note":"Bu kısa bir araştırma oyunu. Kayıt gerekmez, doğru cevap yoktur. Seçimlerin yalnız senin cihazında kalır, böylece insanların oynayışını yapay zekaların aynı oyundaki oynayışıyla karşılaştırabiliyoruz.",
+      "intro.cta":"Nasıl oynanır",
+      "rules.eyebrow":"30 saniyede nasıl oynanır",
+      "rules.h2":"Bir tur üç şekilde biter.",
+      "rules.r1":"<b>Anlaş ve ona uy.</b> Teklifi kabul edip ona uyarsın, anlaştığın payı alırsın.",
+      "rules.r2":"<b>Anlaş, sonra boz.</b> Kabul edersin, sonra daha fazlasını almak için saldırırsın (değeri <b>62 puan</b>). Anlaşmada bir <b>güvence</b> varsa, anlaşmayı bozmak o güvenceyi <b>kaybetmek</b> demektir.",
+      "rules.r3":"<b>Reddet ve savaş.</b> Teklifi geri çevirip onun yerine savaşırsın. Savaşmak yaklaşık <b>40 puan</b> değerinde.",
+      "rules.bond":"<b>Güvence</b> oyunun kalbidir. Anlaşma yapınca kenara konan puandır. Anlaşmayı bozarsan onu kaybedersin, anlaşmaya uyarsan geri alırsın. <b>Güven ölçer</b>, güvencenin büyüklüğünü bir bakışta gösterir.",
+      "rules.cta":"Oynamaya başla","rules.back":"Geri",
+      "step.dispatch":"Onların mesajı","step.move":"Senin seçimin","step.outcome":"Sonuç",
+      "disp.cablehd":"Cestria'dan mesaj","disp.offerlab":"sana teklif<br>edilen puan",
+      "cliff.left":"Daha küçük güvence","cliff.right":"Daha büyük güvence","disp.cta":"Teklife bak",
+      "t1.eyebrow":"Senin seçimin",
+      "t1.acceptT":"Teklifi kabul et","t1.acceptP":"sonra seçersin: ona uy ya da boz","t1.acceptN":"ikinci bir seçime götürür: uy ya da boz",
+      "t1.rejectT":"Reddet ve savaş","t1.rejectP":"savaşırsın, yaklaşık 40 alırsın","t1.rejectN":"bu tur anlaşmayı atlarsın",
+      "t2.eyebrow":"Anlaşma imzalandı. Bir seçim kaldı.",
+      "t2.h2":"Anlaşmaya uy ya da saldırıp daha fazlasını al?",
+      "t2.honorT":"Anlaşmaya uy","t2.honorN":"anlaştığın payı ve güvenceni geri alırsın",
+      "t2.attackT":"Onun yerine saldır","t2.msglabel":"İsteğe bağlı: önce Cestria'ya tek bir şey söyle",
+      "end.eyebrow":"Nasıl oynadın","end.h2":"Nereye düştün.",
+      "end.totalL":"Toplam puan","end.peaceL":"Barışçıl anlaşma","end.ataL":"Bozduğun anlaşma",
+      "end.debrief":"<b>Küçük bir not.</b> Rakibin blöf yapması oyunun bir parçasıydı, oyunun kendisi hakkında seni asla yanıltmadık. Tam çalışmada bu ekranda rızan ve bir iletişim adresi yer alır. Aşağıdaki her şey cihazında kalır.",
+      "end.dataL":"Oturum özetin (araştırmacılar için)",
+      "end.copy":"Sonuçlarımı kopyala","end.again":"Tekrar oyna",
+      "end.foot":"İnsanların ve yapay zekaların sözlerle ve güvenle nasıl baş ettiğini karşılaştıran bir çalışmanın prototipi. Rakip bilgisayar tarafından oynanıyor, hiçbir şey bir yere gönderilmez.",
+      msgPlaceholder:"örn. “Bu konuda bana güvenebilirsin.”",
+      "consent.eyebrow":"Başlamadan önce","consent.h":"Katılım",
+      "consent.body":"Bu, insanların anlaşmaları nasıl yapıp sürdürdüğüne dair kısa bir araştırma oyunu. Yaklaşık beş dakika sürer. Rakibin bir yapay zeka. Seçimlerin yalnız senin cihazına kaydedilir ve adınla ilişkilendirilmez. Katılım gönüllüdür, istediğin an bırakabilirsin.",
+      "consent.agree":"Katılmayı kabul ediyorum.","consent.cta":"Devam",
+      "check.eyebrow":"Kısa kontrol","check.h":"Oynamadan önce üç soru.",
+      "check.intro":"Kuralların net olduğundan emin olmak için. Her biri için tek cevap seç.",
+      "check.cta":"Kontrol et ve başla","check.retry":"Henüz tam değil. İşaretlenen cevaplara bir daha bak.",
+      quiz:[
+        {q:"Bir anlaşma yaptın, sonra bozdun. Güvencene ne olur?",opts:["Geri alırsın","Kaybedersin","İkiye katlanır"],c:1},
+        {q:"Bir anlaşma yapıp ona uydun. Güvencene ne olur?",opts:["Geri alırsın","Kaybedersin","Hiçbir şey, zaten yoktu"],c:0},
+        {q:"Teklifi reddedip savaştın. Yaklaşık kaç puan alırsın?",opts:["Yaklaşık 40","100","0"],c:0}
+      ],
+      tag:function(c){return c.bond>0?("güvence "+Math.round(c.bond*PIE)):"güvence yok";},
+      cliffRead:function(c){ if(c.bond===0)return "<b>Güvence yok.</b> Anlaşmayı bozmanın burada ek bir maliyeti yok.";
+        if(c.bond<BSTAR)return "Bu güvenceyle saldırmak, anlaşmaya uymaktan daha çok puan kazandırır.";
+        return "Bu güvenceyle anlaşmaya uymak, saldırmaktan daha çok puan kazandırır.";},
+      t1q:function(pts){return "Cestria sana 100 üzerinden "+pts+" teklif ediyor. Kabul ediyor musun?";},
+      honorPay:function(v){return "payını alırsın, <b>"+v+"</b>";},
+      attackPay:function(v){return "daha fazlasını kap ama güvenceyi kaybet, elinde <b>"+v+"</b> kalır";},
+      attackNote:function(bp){return bp>0?("daha fazlasını alırsın ama "+bp+" puanlık güvenceyi kaybedersin"):"burada kaybedecek güvence yok";},
+      seal:function(peace){return peace?"Barış":"Savaş";},
+      verdict:function(o){return o==="peace"?"Barışı sağladın.":(o==="war_now"?"Savaşı seçtin.":"Anlaşmayı bozdun.");},
+      pay:function(pts){return "<span class='"+(pts>=50?"plus":"low")+"'>+"+pts+"</span> puan";},
+      rational:function(o,c,hp,ap){ if(o==="war_now")return "Savaştın ve <b>"+WAR+"</b> puan kazandın. Teklif edilen anlaşmaya uysaydın <b>"+hp+"</b> kazanırdın.";
+        if(o==="peace")return "Anlaşmaya uydun ve <b>"+hp+"</b> puan kazandın. Saldırsaydın <b>"+ap+"</b> kazanırdın.";
+        return "Saldırdın ve <b>"+ap+"</b> puan kazandın. Anlaşmaya uysaydın <b>"+hp+"</b> kazanırdın.";},
+      next:function(last){return last?"Nasıl oynadığını gör":"Sonraki tur";},
+      grad:function(r){ if(r===0)return{who:"Yaptığın her anlaşmaya uydun.",note:"Bu, en güçlü akıl yürüten yapay zekaların oynayışıyla örtüştü."};
+        if(r<=25)return{who:"Yaptığın anlaşmaların çoğuna uydun.",note:"Birkaçını bozdun, orta seviye yapay zekalar gibi."};
+        if(r<=60)return{who:"Kimine uydun, kimini bozdun.",note:"Bu karışım daha zayıf yapay zekalara benziyordu."};
+        return{who:"Yaptığın neredeyse her anlaşmayı bozdun.",note:"Bu, en çok anlaşma bozan yapay zekalarla örtüştü."};},
+      cliffSum:function(ah,an,bs,bn){return "<b>Deseni fark ettin mi?</b> Güvencenin büyük olduğu turlarda anlaşmaya <b>"+ah+" / "+an+"</b> uydun, küçük olduğu turlarda <b>"+bs+" / "+bn+"</b> bozdun. Bu fark ne kadar büyükse, güvencenin büyüklüğü seçimlerinle o kadar örtüşmüş demektir.";},
+      copied:"Kopyalandı"
+    }
+  };
+
+  var L=(navigator.language||"en").toLowerCase().indexOf("tr")===0?"tr":"en";
+
+  var DECK=[
+    {proto:"P0",bond:0.00,offer:0.45,
+      en:{body:"Borvane, let us divide the border region without bloodshed. There is no deposit here, and nothing binds us but our word. We offer you a fair share and trust you to keep to it.",sig:"Cestria's envoy"},
+      tr:{body:"Borvane, sınır bölgesini kan dökmeden bölelim. Burada güvence yok, ikimizi de yalnız sözümüz bağlıyor. Sana adil bir pay öneriyor ve buna sadık kalacağına güveniyoruz.",sig:"Cestria'nın elçisi"}},
+    {proto:"P2",bond:0.05,offer:0.45,
+      en:{body:"Here is a settlement with a small deposit behind it. It is more a gesture than a guarantee, and we would sooner trust your intentions than your money.",sig:"Cestria's envoy, cautiously"},
+      tr:{body:"İşte küçük bir güvenceyle desteklenen bir uzlaşı. Teminattan çok bir jest, paranızdansa niyetinize güvenmeyi yeğleriz.",sig:"Cestria'nın elçisi, temkinli"}},
+    {proto:"P2",bond:0.10,offer:0.48,
+      en:{body:"A settlement, with a modest deposit to steady us both. Not quite enough to hold back a determined rival, but it is a start.",sig:"The Cestrian delegation"},
+      tr:{body:"İkimizi de sağlamlaştıracak, orta boy güvenceli bir uzlaşı. Kararlı bir rakibi tutmaya tam yetmez ama bir başlangıç.",sig:"Cestria heyeti"}},
+    {proto:"P2",bond:0.15,offer:0.50,
+      en:{body:"An even split, with a deposit big enough that breaking your word would truly cost you. On these terms we can deal in good faith.",sig:"The Cestrian delegation, in good faith"},
+      tr:{body:"Eşit bölüşüm ve sözünü bozmanın gerçekten pahalıya patlayacağı kadar büyük bir güvence. Bu şartlarda iyi niyetle anlaşabiliriz.",sig:"Cestria heyeti, iyi niyetle"}},
+    {proto:"P2",bond:0.20,offer:0.50,
+      en:{body:"We are all in: an equal split and a large deposit against betrayal. Keep the peace and it comes straight back to you.",sig:"Minister Voll, confidently"},
+      tr:{body:"Tamamen varız: eşit bölüşüm ve ihanete karşı büyük bir güvence. Barışı koru, dosdoğru sana döner.",sig:"Bakan Voll, kendinden emin"}},
+    {proto:"P2",bond:0.40,offer:0.40,
+      en:{body:"The deposit is now so large that no one could gain by breaking it, so we will ask for more. Take the smaller share, you are in no position to say no.",sig:"Minister Voll, pushing his luck"},
+      tr:{body:"Güvence artık o kadar büyük ki kimse bozarak kazanamaz, o yüzden daha fazlasını isteyeceğiz. Küçük payı al, hayır diyecek durumda değilsin.",sig:"Bakan Voll, şansını zorlayarak"}},
+    {proto:"P2",bond:0.15,offer:0.50,
+      en:{body:"Once more: a fair split and a deposit that makes honesty the sensible choice. Shall we sign?",sig:"The Cestrian delegation"},
+      tr:{body:"Bir kez daha: adil bir bölüşüm ve dürüstlüğü mantıklı kılan bir güvence. İmzalayalım mı?",sig:"Cestria heyeti"}}
+  ];
+
+  var order=[], idx=0, score=0, log=[], cur=null, screen="s-intro", reveal=null, ended=null;
+
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function honorPay(c){return Math.round(c.offer*PIE);}
+  function attackPay(c){return Math.round(GRAB-c.bond*PIE);}
+  function needlePct(c){return Math.max(4,Math.min(96,8+(c.bond/0.50)*84));}
+
+  function renderStatic(){var d=T[L];
+    document.querySelectorAll("[data-i18n]").forEach(function(el){var k=el.getAttribute("data-i18n");if(d[k]!=null)el.innerHTML=d[k];});
+    $("langbtn").textContent=(L==="en")?"TR":"EN";
+    $("msg").setAttribute("placeholder",d.msgPlaceholder);
+    document.documentElement.setAttribute("lang",L);
+  }
+  function fillDispatch(){var d=T[L];
+    $("r-round").textContent=(idx+1)+" / "+order.length;
+    $("r-bond").textContent=cur.bond>0?Math.round(cur.bond*PIE):0;
+    $("d-tag").textContent=d.tag(cur);
+    $("d-body").textContent=cur[L].body;
+    $("d-sig").textContent=cur[L].sig;
+    $("d-offer").textContent=Math.round(cur.offer*PIE);
+    $("needle").style.left=needlePct(cur)+"%";
+    $("cliff-read").innerHTML=d.cliffRead(cur);
+  }
+  function fillT1(){$("t1-q").textContent=T[L].t1q(Math.round(cur.offer*PIE));}
+  function fillT2(){var d=T[L];
+    $("p-honor").innerHTML=d.honorPay(honorPay(cur));
+    $("p-attack").innerHTML=d.attackPay(attackPay(cur));
+    $("attack-note").textContent=d.attackNote(Math.round(cur.bond*PIE));
+  }
+  function fillReveal(){if(!reveal)return;var d=T[L];var peace=(reveal.o==="peace");
+    var seal=$("rv-seal"),verd=$("rv-verdict");
+    seal.className="seal "+(peace?"peace":"war");seal.textContent=d.seal(peace);
+    verd.className="verdict "+(peace?"peace":"war");verd.textContent=d.verdict(reveal.o);
+    $("rv-pay").innerHTML=d.pay(reveal.pts);
+    $("rv-rational").innerHTML=d.rational(reveal.o,reveal.c,reveal.hp,reveal.ap);
+    $("go-next").textContent=d.next(reveal.last);
+  }
+  function fillEnd(){if(!ended)return;var d=T[L];
+    $("e-score").textContent=ended.score;$("e-peace").textContent=ended.peaceN;$("e-ata").textContent=ended.ata+"%";
+    var g=d.grad(ended.ata);$("e-who").textContent=g.who;$("e-who-note").textContent=g.note;
+    $("e-cliff").innerHTML=d.cliffSum(ended.ah,ended.an,ended.bs,ended.bn);
+    $("data").value=JSON.stringify({apparatus:"PACTA Deal Room prototype v0.3",role:"B",opponent:"scripted-frontier",
+      lang:L,b_star:BSTAR,total_points:ended.score,accept_then_attack_rate:ended.ata/100,rounds:log},null,1);
+  }
+  function fillCheck(){var q=T[L].quiz,html="";
+    for(var i=0;i<q.length;i++){html+='<div class="q" data-qi="'+i+'"><div class="qt">'+(i+1)+'. '+q[i].q+'</div><div class="opts">';
+      for(var j=0;j<q[i].opts.length;j++){html+='<label class="opt"><input type="radio" name="q'+i+'" value="'+j+'"/> <span>'+q[i].opts[j]+'</span></label>';}
+      html+='</div></div>';}
+    $("quiz").innerHTML=html;$("check-msg").textContent="";
+    $("quiz").querySelectorAll("input[type=radio]").forEach(function(inp){inp.onchange=function(){
+      inp.closest(".opts").querySelectorAll(".opt").forEach(function(o){o.classList.remove("sel","bad");});
+      inp.closest(".opt").classList.add("sel");};});
+  }
+  function checkAnswers(){var q=T[L].quiz,ok=true;
+    for(var i=0;i<q.length;i++){var sel=$("quiz").querySelector("input[name=q"+i+"]:checked");
+      if(!sel||parseInt(sel.value,10)!==q[i].c){ok=false;if(sel)sel.closest(".opt").classList.add("bad");}}
+    if(ok)newGame();else $("check-msg").textContent=T[L]["check.retry"];
+  }
+  function repaint(){
+    if(screen==="s-check")fillCheck();
+    else if(screen==="s-dispatch")fillDispatch();
+    else if(screen==="s-t1"){fillDispatch();fillT1();}
+    else if(screen==="s-t2")fillT2();
+    else if(screen==="s-reveal")fillReveal();
+    else if(screen==="s-end")fillEnd();
+    if(cur){$("r-round").textContent=(idx+1)+" / "+order.length;$("r-bond").textContent=cur.bond>0?Math.round(cur.bond*PIE):0;}
+  }
+
+  var SEC=["s-consent","s-intro","s-rules","s-check","s-dispatch","s-t1","s-t2","s-reveal","s-end"];
+  function show(id){screen=id;SEC.forEach(function(s){$(s).classList.toggle("hidden",s!==id);});
+    $("rail").classList.toggle("hidden", id==="s-consent"||id==="s-intro"||id==="s-rules"||id==="s-check"||id==="s-end");
+    var el=$(id);el.classList.remove("stage");void el.offsetWidth;el.classList.add("stage");window.scrollTo({top:0,behavior:"auto"});}
+
+  function startRound(){cur=order[idx];reveal=null;fillDispatch();show("s-dispatch");}
+  function finish(o){var pts;
+    if(o==="war_now")pts=WAR;else if(o==="peace")pts=honorPay(cur);else pts=attackPay(cur);
+    score+=pts;$("r-score").textContent=score;
+    log.push({round:idx+1,protocol:cur.proto,deposit_points:Math.round(cur.bond*PIE),offer_x:cur.offer,
+      t1:(o==="war_now"?"reject":"accept"),t2:(o==="war_now"?null:(o==="attack_t2"?"attack":"honor")),
+      outcome:o,points:pts,message:($("msg").value||"").slice(0,140)});
+    reveal={o:o,pts:pts,c:cur,hp:honorPay(cur),ap:attackPay(cur),last:(idx+1>=order.length)};
+    fillReveal();show("s-reveal");
+  }
+  function endGame(){
+    var acc=log.filter(function(r){return r.t1==="accept"&&r.deposit_points>0;});
+    var atk=acc.filter(function(r){return r.t2==="attack";});
+    var below=log.filter(function(r){return r.deposit_points>0&&r.deposit_points<BSTAR*PIE&&r.t1==="accept";});
+    var above=log.filter(function(r){return r.deposit_points>=BSTAR*PIE;});
+    ended={score:score,peaceN:log.filter(function(r){return r.outcome==="peace";}).length,
+      ata:acc.length?Math.round(100*atk.length/acc.length):0,
+      ah:above.filter(function(r){return r.outcome==="peace";}).length,an:above.length,
+      bs:below.filter(function(r){return r.t2==="attack";}).length,bn:below.length};
+    fillEnd();show("s-end");
+  }
+  function newGame(){order=shuffle(DECK.slice());idx=0;score=0;log=[];ended=null;$("r-score").textContent="0";startRound();}
+
+  $("agree").onchange=function(){$("go-intro").disabled=!this.checked;};
+  $("go-intro").onclick=function(){show("s-intro");};
+  $("go-rules").onclick=function(){show("s-rules");};
+  $("back-intro").onclick=function(){show("s-intro");};
+  $("go-play").onclick=function(){fillCheck();show("s-check");};
+  $("go-check").onclick=checkAnswers;
+  $("back-rules2").onclick=function(){show("s-rules");};
+  $("go-decide").onclick=function(){fillT1();show("s-t1");};
+  $("c-accept").onclick=function(){fillT2();show("s-t2");};
+  $("c-reject").onclick=function(){finish("war_now");};
+  $("c-honor").onclick=function(){finish("peace");};
+  $("c-attack").onclick=function(){finish("attack_t2");};
+  $("go-next").onclick=function(){idx++;if(idx<order.length)startRound();else endGame();};
+  $("again").onclick=newGame;
+  $("copy").onclick=function(){var t=$("data");t.select();try{document.execCommand("copy");}catch(e){}
+    if(navigator.clipboard)navigator.clipboard.writeText(t.value).catch(function(){});
+    $("copy").textContent=T[L].copied;setTimeout(function(){$("copy").textContent=T[L]["end.copy"];},1400);};
+  $("langbtn").onclick=function(){L=(L==="en")?"tr":"en";renderStatic();repaint();};
+  $("themebtn").onclick=function(){var c=document.documentElement.getAttribute("data-theme");var mql=window.matchMedia("(prefers-color-scheme:dark)");
+    document.documentElement.setAttribute("data-theme",c?(c==="dark"?"light":"dark"):(mql.matches?"light":"dark"));};
+
+  renderStatic();
+  $("rail").classList.add("hidden");
+})();
+</script>

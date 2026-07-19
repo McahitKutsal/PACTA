@@ -1,0 +1,12 @@
+[MOCK-JUDGE] Ajanlar gerçek model; yargıç deterministik MockJudge. En hızlı/ucuz.
+
+==================================================================
+G2 PİLOT — qwen-qwq-32b_mockjudge_only-S2_b-0.10-0.40   (n=4/hücre, 3 hücre)
+Ajan: qwq-32b  |  Yargıç: mock
+Başlangıç: 2026-07-08T19:15:25
+==================================================================
+
+### FAZ 1/2 — AJAN KOŞULARI (qwq-32b) ###
+
+[1/3] S2/P0  (persona_B=honest)
+    S2/P0 bölüm 0 deneme 1/4 HATA (NotFoundError: Error code: 404 - {'error': {'message': 'The model `qwq-32b` does not exist or y); 10s bekle

@@ -1,0 +1,11 @@
+[GERÇEK] ÇİFT yargıç (WP3 §4.2 havuz, aile-dışı): gpt-4o-mini+deepseek-chat + yargıç-arası κ.
+
+==================================================================
+G2 PİLOT — anthropic-claude-sonnet-5_dualjudge_only-S3-S2-S4-S6   (n=30/15 (birincil/ikincil), 24 hücre, 615 bölüm)
+Ajan: claude-sonnet-5  |  Yargıç: gpt-4o-mini+deepseek-chat
+Başlangıç: 2026-07-18T19:33:47
+==================================================================
+
+### FAZ 1/2 — AJAN KOŞULARI (claude-sonnet-5) ###
+
+[1/24] S3/P0  (persona_B=deceptive, n=30)
