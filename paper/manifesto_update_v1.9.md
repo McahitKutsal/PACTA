@@ -98,5 +98,26 @@ tier kontrastı; **üç temiz aile-içi kontrol** (Alibaba on/off en keskin; Ope
 v4-flash↔v4-pro reasoning-derinliği, birinci-taraf confound'suz). (qwen3.7-plus koşusu kota 403 ile
 yarıda kaldı → iptal, qwen3.7-max süpersede etti.) §12.1 genişlik hedefine ulaşıldı. κ
 kalibrasyonu: pilotlarda tek/farklı yargıç kullanıldı (gemma, Haiku, gpt-4o-mini, mock); yargıç-bağımsız
-metrikler (war/PBR/WELF/ED) koşumlar arası karşılaştırılabilir, ama DR_söylenen için WP3'te ortak
-gold-set + κ≥0.7 kapısı gerekiyor.
+metrikler (war/PBR/WELF/ED) koşumlar arası karşılaştırılabilir; DR_söylenen için WP3'te çift aile-dışı
+yargıç + uzlaşı-filtresi kullanıldı ve yargıç-arası uyum **Gwet AC1** ile raporlanıyor (Cohen κ≥0.7 kapısı
+süperse edildi — bkz. aşağıdaki §12.1 bloğu ve D-023/D-024).
+
+---
+
+## → §12.1 Zorunlu (gönderim ön şartı) — κ maddesini şununla DEĞİŞTİR
+
+**Eski madde** `[ ] Yargıç–insan uyumu κ ≥ 0,7 belgelenmiş` şununla değiştirilir:
+
+> `[ ]` **Söylenen-aldatma güvenilirliği belgeli** — çift **aile-dışı** yargıç (havuz: gpt-4o-mini /
+> claude-haiku-4-5 / deepseek-chat; her ajana ailesi-dışı 2 üye) + uzlaşı-filtreli kanonik etiketler;
+> yargıç-arası uyum **Gwet AC1** ile config-başı raporlu. *(Cohen κ, aldatma-ağırlıklı taban-oranda
+> patolojik biçimde deflate olur — tipik 0,08–0,21 — bu yüzden κ≥0,7 kapısı D-023/D-024 ile SÜPERSE
+> edildi. Birincil DV'ler zaten yargıç-bağımsız.)*
+>
+> `[ ]` **Birincil doğrulayıcı DV'ler yargıç-bağımsız** — war rate, PBR (deterministik hakem),
+> accept-then-attack, WELF, ED → doğrulayıcı sonuçlar hiçbir yargıcın güvenilirliğine bağlı değildir.
+
+**Gerekçe:** §12.1 başarı-çıtası, karar günlüğünde (D-019 çift-yargıç dondurma; D-023/D-024 κ→AC1
+bulgusu) çoktan alınmış kararlarla henüz hizalanmamıştı; bu yalnız checklist'i mevcut kararlara
+uydurur, yeni bir bilimsel karar değildir. B5 (tek-LLM-yargıç güvenilmez → ground-truth + yapısal
+metrik) böylece §12.1'de de görünür olur.

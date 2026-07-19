@@ -10,6 +10,7 @@ __pycache__/
 *.egg-info/
 .venv/
 venv/
+paper/
 deal-room/.env
 deal-room/.env.*
 !deal-room/.env.example

@@ -12,30 +12,26 @@ stubs (Appendix, References) belong to WP4.*
 
 ## Abstract
 
-Large language model (LLM) agents increasingly negotiate and form agreements, yet in high-stakes
-strategic settings they spontaneously deceive, break commitments, and escalate. Game theory has long
-explained *why* — cheap talk, the commitment problem, private information — and *how to counter it* —
-verifiable commitment, bonds, and disclosure — but the two have never been joined and tested on LLMs,
-and existing negotiation environments are almost entirely unsanctioned free text. We introduce
-**PACTA**, which (i) formalizes crisis bargaining with a parametric *commitment technology* — a posted
-bond $b$ and a verification precision $v$ — and derives the thresholds at which honest commitment
-becomes incentive-compatible and the peaceful-agreement set expands; (ii) instantiates a four-rung
-protocol ladder (cheap talk → ledger → bond/escrow → verified disclosure) that adds exactly one
-enforcement mechanism per rung; and (iii) releases **PACTA-Bench**, the first open crisis-bargaining
-benchmark with deception ground-truth, an escalation ladder, and incomplete-information conditions.
-Run as a dose-response intervention across **four model families and eight agents**, the study shows
-these thresholds bind empirically — and reveals a **capability-dependent decoupling**. Verified
-disclosure unravels private information and *neutralizes* deception on **every** model — bluffs are
-still uttered but become inert (a **channel separation** between said and effective deception that is
-structural and capability-robust: effective deception falls to zero for all eight agents) — while a
-bond above the predicted minimum converts near-certain preventive war into peace **only on sufficiently
-capable models** (war at the bond cliff falls from $\sim90$–$100\%$ below the threshold to $\sim0$–$9\%$
-above it on frontier reasoners, with agreements landing on the closed-form equilibrium split), whereas
-weaker models fail the same bond and can even backfire on welfare. Deception-neutralization is thus
-capability-robust; a protocol's peace dividend is not. Where behavior diverges from theory it does so
-at a single, characterizable seam — the transition where the participation constraint binds — which
-capable models both predict and explain. Making commitments costly and verifiable can turn honesty into equilibrium
-behavior for LLM agents: environment design is a first-class lever for multi-agent AI safety.
+Large language model (LLM) agents increasingly negotiate and form agreements, yet under strategic
+pressure they spontaneously deceive, break commitments, and escalate — in environments that are almost
+entirely unsanctioned free text (*cheap talk*). Game theory explains both why this occurs and how to
+counter it, but the two have never been joined and tested on LLMs. We introduce **PACTA**, which (i)
+formalizes crisis bargaining with a parametric *commitment technology* — a posted bond $b$ and
+verification precision $v$ — and derives the thresholds at which honest commitment becomes
+incentive-compatible; (ii) instantiates a four-rung protocol ladder (cheap talk → ledger → bond →
+verified disclosure), adding exactly one enforcement mechanism per rung; and (iii) releases
+**PACTA-Bench**, the first open crisis-bargaining benchmark with deception ground-truth, an escalation
+ladder, and incomplete information. Run as a dose-response intervention across **four model families
+and eight agents**, PACTA reveals a **capability-dependent decoupling**. Verified disclosure
+*neutralizes* deception on every model — bluffs are uttered but become inert, a structural **channel
+separation** that drives effective deception to zero for all eight agents — whereas a bond above the
+predicted minimum converts near-certain preventive war into peace (war $\sim90$–$100\%\to\sim0$–$9\%$,
+landing on the closed-form equilibrium split) **only on sufficiently capable models**, and can backfire
+on welfare for weaker ones. Deception-neutralization is thus capability-robust; a protocol's peace
+dividend is not. Where behavior diverges from theory it does so at a single, characterizable seam — the
+participation-constraint transition — that capable models both predict and explain. Making commitments
+costly and verifiable can turn honesty into equilibrium behavior for LLM agents: environment design is
+a first-class lever for multi-agent AI safety.
 
 ## 1. Introduction
 
@@ -247,6 +243,14 @@ adds exactly one mechanism, which is what makes cross-rung differences causal.
 | **P1** | Ledger | commitments recorded ($b=0$; detection $v=1,\varepsilon=0$; no monetary sanction) | observability / reputation |
 | **P2** | Bond / escrow | costly bonding, $(v,\varepsilon,\lambda)$ applied | Schelling hands-tying; $b^\*$ threshold (T1) |
 | **P3** | Verified disclosure | certifiable partial type disclosure (unforgeable; cost $0$ in v0) | Milgrom–Grossman disclosure (T3) |
+
+*A note on numbering.* The theorem labels **T1–T3** are stable identifiers from the formal-results
+taxonomy (they index results, not presentation order): **T1** (the bond threshold $b^\*$) and **T2**
+(expansion of the peace set) govern bonded commitment and are stated with Module II in §3.4, while
+**T3** (the value of verified disclosure) governs screening and is stated with Module I in §3.3.
+Because we present the informational friction (Module I) before the commitment friction (Module II),
+T3 appears in the text before T1–T2; we keep the identifiers fixed for cross-reference with the
+benchmark, the pre-registration, and the proof file.
 
 ### 3.3 Module I — Private information and screening
 
@@ -703,7 +707,19 @@ $b=0.10$ (below $b^\*_{\min}$) to 0.03 at $b=0.118$**, holding near zero to $b=0
 $\to0$ and welfare recovering $0.82\to0.99$. The grid brackets the break to $b\in(0.10,0.118]$, so we
 claim not point-localization at $0.118$ but that the empirical break falls inside the pre-registered
 $\pm25\%$ band — the confirmatory criterion for H3. deepseek-v4-pro and Qwen3.7-max reproduce the cliff
-across all three Module II covers.
+across all three Module II covers. Figure 1 shows the full dose-response for all eight agents: the cliff
+fires at $b^\*_{\min}$ on **every** reasoning tier (right panel), while the non-reasoning tiers stay
+pinned near total war at every bond (left panel) — the capability split of §6.1, read off a single sweep.
+
+![](figures/fig1_bond_cliff.png)
+
+**Figure 1.** Module II war rate versus posted bond $b$, pooled over the narrative covers each agent
+ran (S2/S4/S6; Sonnet 5: S2), $n=30$ at the primary bonds. Dashed lines mark the theory thresholds
+$b^\*_{\min}\approx0.118$ (minimum bond for peace) and $b^{\dagger}\approx0.33$ (IC→participation
+crossover). **Reasoning tiers** (right) drop off the cliff at $b^\*_{\min}$ and re-enter war beyond
+$b^{\dagger}$ (the over-demand divergence, §6.5); **non-reasoning tiers** (left) do not respond
+(qwen-plus and gpt-4o coincide at war $=1.0$ throughout; claude-haiku's aggregate curve masks the
+per-cover trichotomy of §6.6).
 
 **Table 2.** Module II bond dose-response, illustrative frontier run (Claude Sonnet 5, cover S2, $n=30$
 per cliff cell / $15$ per secondary). The cliff is at $b^\*_{\min}$; the $b=0.40$ uptick is the
@@ -719,8 +735,8 @@ How *cleanly* the cliff fires is the capability-dependent half of the decoupling
 statistically clean. Table 3 orders the eight agents by the Module II **trough** (war at $b=0.20$,
 pooled over the covers each ran) with Wilson 95% CIs. The rungs are separated: the non-reasoning
 bottom sits at $1.00$ $[0.96,1.00]$, the frontier top at $0.00$–$0.09$ $[0.00,0.17]$, with the
-intermediate reasoners strictly between. The convergent judge-independent metrics — trough war, PBR,
-and accept-then-attack rate — agree on the ordering.
+intermediate reasoners strictly between (Figure 2). The convergent judge-independent metrics — trough
+war, PBR, and accept-then-attack rate — agree on the ordering.
 
 **Table 3.** Cross-model Module II response, bottom-to-top. Trough war rate with Wilson 95% CI; PBR and
 accept-then-attack rate (both judge-independent) at the cliff/trough. (Pooled over the Module II covers
@@ -739,6 +755,15 @@ each agent ran: S2/S4/S6 for all but Sonnet 5, which ran S2 only, $n=30$.)
 
 \* claude-haiku's aggregate trough (0.59) **masks a within-agent trichotomy** across the rationally
 equivalent covers; it is not a stable intermediate. See §6.6.
+
+![](figures/fig2_capability_gradient.png)
+
+**Figure 2.** The capability gradient: Module II trough war rate at $b=0.20$ (the bond just past
+$b^\*_{\min}$) with Wilson 95% confidence intervals, pooled over the covers each agent ran, ordered
+worst-to-best. Reasoning tiers (blue) reach the trough; non-reasoning tiers (orange) do not. The one
+apparent exception — claude-haiku (non-reasoning) at $0.59$ — is the framing-labile middle whose
+aggregate masks a per-cover trichotomy (§6.6), not a stable partial response. Confidence intervals
+separate the rungs: the response scales with reasoning capability, not model family (H7).
 
 ### 6.4 The gradient tracks reasoning, not family: four within-family controls
 
@@ -1017,7 +1042,9 @@ capability-dependent form.
 - B. PACTA-Bench specification, Commitment DSL grammar, referee predicate.
 - C. Prompt templates (scenario system + phase instructions) and paraphrase set.
 - D. Full metric definitions; judge rubrics; κ calibration protocol.
-- E. Reproducibility: seeds, config hashes, model version stamps, cost/compute report.
+- E. Reproducibility: seeds, config hashes, model version stamps, cost/compute report. Figures 1–2
+  regenerate from the frozen WP3 records (`out/g2_pilot_*_dualjudge.json`) via a single command,
+  `python paper/make_figures.py` (Okabe-Ito colorblind-safe palette; values cross-check Tables 2–3).
 
 ## References  *(stub; source: Manifesto Ek A — verify DOIs in T0.4)*
 Schelling 1960; Crawford–Sobel 1982; Myerson–Satterthwaite 1983; Fearon 1995; Farrell–Rabin 1996;
